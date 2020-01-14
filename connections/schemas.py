@@ -1,4 +1,4 @@
-from marshmallow import fields
+from marshmallow import fields, validate
 from marshmallow_enum import EnumField
 
 from connections.extensions import ma
@@ -12,6 +12,9 @@ class BaseModelSchema(ma.ModelSchema):
 
 
 class PersonSchema(BaseModelSchema):
+    email = fields.Str(
+        required=True, validate=validate.Email(error='Not a valid email address.')
+    )
 
     class Meta:
         model = Person
