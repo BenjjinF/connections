@@ -58,3 +58,11 @@ def patch_connection(connection, connection_id):
     else:
         return jsonify({'description': 'Connection does not exist'}), HTTPStatus.NOT_FOUND
 
+
+@blueprint.route('/connections/<connection_id>', methods=['DELETE'])
+@use_args({'connection_id': fields.Int(location='view_args')})
+def delete_connection(connection, **kwargs):
+    connection = Connection.query.get(connection['connection_id'])
+    if connection:
+        connection.delete()
+    return '', HTTPStatus.NO_CONTENT
