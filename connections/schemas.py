@@ -24,3 +24,13 @@ class ConnectionSchema(BaseModelSchema):
 
     class Meta:
         model = Connection
+
+
+class NestedConnectionSchema(BaseModelSchema):
+    from_person = fields.Nested(PersonSchema)
+    to_person = fields.Nested(PersonSchema)
+    connection_type = EnumField(ConnectionType)
+
+    class Meta:
+        model = Connection
+        excludes = ['from_person_id', 'to_person_id']

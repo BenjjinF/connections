@@ -48,6 +48,21 @@ paths:
         400:
           description: "Invalid input"
   /connections:
+    get:
+      summary: "Get list of connections"
+      description: ""
+      operationId: "getConnections"
+      produces:
+      - "application/json"
+      responses:        
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/NestedConnection"
+        400:
+          description: "Invalid input"
     post:
       summary: "Create a new connection"
       description: ""

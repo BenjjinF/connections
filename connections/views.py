@@ -4,7 +4,7 @@ from flask import Blueprint
 from webargs.flaskparser import use_args
 
 from connections.models.person import Person
-from connections.schemas import ConnectionSchema, PersonSchema
+from connections.schemas import ConnectionSchema, NestedConnectionSchema, PersonSchema
 
 blueprint = Blueprint('connections', __name__)
 
@@ -21,6 +21,13 @@ def get_people():
 def create_person(person):
     person.save()
     return PersonSchema().jsonify(person), HTTPStatus.CREATED
+
+
+@blueprint.route('/connections', methods=['GET'])
+def get_connections():
+    connection_schema = NestedConnectionSchema(many=True)
+    connections = Connection.query.all()
+    return connection_schema.jsonify(connections), HTTPStatus.OK
 
 
 @blueprint.route('/connections', methods=['POST'])
