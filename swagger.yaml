@@ -85,15 +85,38 @@ paths:
           $ref: "#/definitions/Connection"
         400:
           description: "Invalid input"
+    patch:
+      summary: "Patches an existing connection"
+      description: ""
+      operationId: "patchConnection"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "path"
+        name: "connection_id"
+        description: "Connection object that needs to be patched"
+        required: true
+        type: integer
+      - in: "body"
+        name: "body"
+        description: "New connection_type to be patched on Connection object"
+        required: true
+        schema:
+          type: "object"
+          properties:
+            connection_type:
+              type: string
       responses:
         200:
           description: "successful operation"
           schema:
-            type: "object"
-            items:
               $ref: "#/definitions/Connection"
         400:
           description: "Invalid input"
+        404:
+          description: "Connection does not exist"
 definitions:
   NewPerson:
     type: "object"
