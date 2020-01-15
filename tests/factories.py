@@ -32,8 +32,8 @@ class ConnectionFactory(BaseFactory):
 
     connection_type = 'friend'
 
-    from_person = SubFactory(PersonFactory)
-    to_person = SubFactory(PersonFactory)
+    from_person_id = SubFactory(PersonFactory)
+    to_person_id = SubFactory(PersonFactory)
 
     class Meta:
 
