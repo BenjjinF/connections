@@ -3,6 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint
 from webargs.flaskparser import use_args
 
+from connections.extensions import cache
 from connections.models.person import Person
 from connections.schemas import ConnectionSchema, PersonSchema
 
@@ -10,6 +11,7 @@ blueprint = Blueprint('connections', __name__)
 
 
 @blueprint.route('/people', methods=['GET'])
+@cache.cached(timeout=10)
 def get_people():
     people_schema = PersonSchema(many=True)
     people = Person.query.all()
