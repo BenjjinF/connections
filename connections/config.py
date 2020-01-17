@@ -12,6 +12,10 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     SQLALCHEMY_POOL_RECYCLE = 3600
 
+    CACHE_TYPE = environ.get('CACHE_TYPE', 'redis')
+    REDIS_HOST = environ.get('REDIS_HOST', 'redis_connections')
+    CACHE_REDIS_URL = environ.get('CACHE_REDIS_URL', 'redis://redis_connections:6379/0')
+
 
 class TestConfig(Config):
     TESTING = True

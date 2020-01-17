@@ -5,8 +5,8 @@ WORKDIR /app
 RUN apk update \
     && apk add --no-cache --virtual .build-deps mariadb-dev alpine-sdk openssh git \
     && apk add --virtual .runtime-deps mariadb-client-libs libffi-dev xmlsec \
-    && pip install --upgrade pip==18.0 \
-    && pip install pipenv==2018.7.1
+    && pip install --upgrade pip~=19.3 \
+    && pip install pipenv
 
 COPY Pipfile /app/Pipfile
 COPY Pipfile.lock /app/Pipfile.lock

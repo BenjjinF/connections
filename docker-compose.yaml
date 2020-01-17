@@ -55,3 +55,10 @@ services:
       - ./:/app
     depends_on:
       - mysql
+      - redis
+
+  redis:
+      image: redis:alpine
+      container_name: redis_connections
+      ports:
+        - '6379:6379'
